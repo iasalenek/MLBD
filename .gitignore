@@ -1,3 +1,12 @@
+# Spark
+spark-3.3.1-bin-hadoop3
+
+# Data
+**/*.csv
+
+# .DS_Store
+**/.DS_Store
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
