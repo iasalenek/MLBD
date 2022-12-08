@@ -2,15 +2,14 @@ from __future__ import print_function
 
 import os
 import sys
-import math
 
-import findspark
 from pyspark import SparkContext, SparkConf
 
 
 def set_up_env():
     os.environ["SPARK_HOME"] = "spark-3.3.1-bin-hadoop3"
     os.environ["PYSPARK_PYTHON"] = sys.executable
+
 
 if __name__ == "__main__":
     set_up_env()
@@ -26,7 +25,7 @@ if __name__ == "__main__":
     webLanguages = sc.parallelize(
         ["PHP", "Ruby", "Perl", "JavaScript", "Python"])
     mlLanguages = sc.parallelize(
-        ["JavaScript", "Python", "Scala"]) 
+        ["JavaScript", "Python", "Scala"])
 
     # 1. Найдите все ЯП, запускаемые на JVM и имеющие поддержку ML
     JVM_ML = jvmLanguages \
@@ -46,3 +45,5 @@ if __name__ == "__main__":
         .distinct() \
         .collect()
     print(', '.join(JVM_Func_Unique))
+
+    sc.stop()

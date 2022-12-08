@@ -4,13 +4,13 @@ import os
 import sys
 import math
 
-import findspark
 from pyspark import SparkContext, SparkConf
 
 
 def set_up_env():
     os.environ["SPARK_HOME"] = "spark-3.3.1-bin-hadoop3"
     os.environ["PYSPARK_PYTHON"] = sys.executable
+
 
 if __name__ == "__main__":
     set_up_env()
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     # 3. Загрузите RDD из файла
     distData = sc.textFile("task2/data").map(lambda x: int(x))
-    
+
     # 4. Превратите эту RDD в RDD пар, где ключ - это остаток от деления исходного числа на 100, а значение - значение логарифма по основанию e (натурального логарифма) от исходного числа
     distDataKeyVal = distData.map(lambda x: (x % 100, math.log(x)))
 
@@ -41,3 +41,5 @@ if __name__ == "__main__":
 
     # 6. Распечатайте результат группировки в стандартный поток вывода (на экран)
     print(count)
+
+    sc.stop()

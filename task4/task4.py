@@ -2,15 +2,14 @@ from __future__ import print_function
 
 import os
 import sys
-import math
 
-import findspark
 from pyspark import SparkContext, SparkConf
 
 
 def set_up_env():
     os.environ["SPARK_HOME"] = "spark-3.3.1-bin-hadoop3"
     os.environ["PYSPARK_PYTHON"] = sys.executable
+
 
 if __name__ == "__main__":
     set_up_env()
@@ -30,7 +29,7 @@ if __name__ == "__main__":
         "John 2800 April",
     ]
 
-    #### 
+    ####
     def split(line):
         name, salary, mounth = line.split(" ")
         return (name, int(salary))
@@ -46,3 +45,5 @@ if __name__ == "__main__":
         .mapValues(lambda x: x[0] / x[1]).collect()
 
     print_answer(answer)
+
+    sc.stop()

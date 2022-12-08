@@ -1,3 +1,6 @@
+#.vscode/
+.vscode/
+
 # Spark
 spark-3.3.1-bin-hadoop3
 

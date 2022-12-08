@@ -3,19 +3,22 @@ from __future__ import print_function
 import os
 import sys
 
-import pandas as pd
 from pyspark.sql import SparkSession
 from pyspark.sql.functions import udf
 from pyspark.sql.types import BooleanType
 
 # Штаты, граничащие с Канадой
-# Аляска, Мичиган, Мэн, Миннесота, Монтана, Нью-Йорк, Вашингтон, Северная Дакота, Огайо, Вермонт, Нью-Гэмпшир, Айдахо, Пенсильвания. 
-BORDERS_WITH_CANADA = ['AK', 'MI', 'ME', 'MN', 'MT', 'NY', 'WA', 'ND', 'OH', 'VT', 'NH', 'ID', 'PA']
+# Аляска, Мичиган, Мэн, Миннесота, Монтана, Нью-Йорк, Вашингтон, Северная Дакота, Огайо, Вермонт, Нью-Гэмпшир, Айдахо, Пенсильвания.
+BORDERS_WITH_CANADA = [
+    'AK', 'MI', 'ME', 'MN', 'MT',
+    'NY', 'WA', 'ND', 'OH', 'VT',
+    'NH', 'ID', 'PA']
 
 
 def set_up_env():
     os.environ["SPARK_HOME"] = "spark-3.3.1-bin-hadoop3"
     os.environ["PYSPARK_PYTHON"] = sys.executable
+
 
 if __name__ == "__main__":
     set_up_env()
@@ -50,3 +53,5 @@ if __name__ == "__main__":
         .select("Name").distinct() \
 
     answer.write.mode("overwrite").parquet('task7/answer')
+
+    spark.stop()
